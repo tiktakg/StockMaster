@@ -1,4 +1,5 @@
-﻿using StockMaster.Windows;
+﻿using Microsoft.VisualBasic.Logging;
+using StockMaster.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,7 @@ using System.Windows.Shapes;
 
 namespace StockMaster.windows
 {
-    /// <summary>
-    /// Interaction logic for AuthWindow.xaml
-    /// </summary>
+  
     public partial class AuthWindow : Window
     {
         public AuthWindow()
@@ -27,8 +26,31 @@ namespace StockMaster.windows
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
+            string login = LoginTextBox.Text.Trim();
+            string password = PasswordBox.Password;
+
+            if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(password))
+            {
+                MessageBox.Show("Логин и пароль не могут быть пустыми!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (!Tools.IsUserExist(login, password))
+            {
+                MessageBox.Show("Пользователь с таким логином не найден!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
+            this.Close();
+        }
+
+        private void RegisterButton_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterWindow registerWindow = new RegisterWindow();
+            registerWindow.Show();
             this.Close();
         }
     }

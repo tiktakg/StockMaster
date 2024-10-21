@@ -10,8 +10,7 @@ public partial class StockContext : DbContext
     {
     }
 
-    public StockContext(DbContextOptions<StockContext> options)
-        : base(options)
+    public StockContext(DbContextOptions<StockContext> options)  : base(options)
     {
     }
 
@@ -29,7 +28,7 @@ public partial class StockContext : DbContext
 
     public virtual DbSet<Role> Roles { get; set; }
 
-    public virtual DbSet<SectorPage> Sectors { get; set; }
+    public virtual DbSet<Sectors> Sectors { get; set; }
 
     public virtual DbSet<Stock> Stocks { get; set; }
 
@@ -38,8 +37,23 @@ public partial class StockContext : DbContext
     public virtual DbSet<WatchlistStock> WatchlistStocks { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Data Source=TikTak;Initial Catalog=stock;Integrated Security=True;Trust Server Certificate=True");
+
+    public static List<User> getAllUsers()
+    {
+        using (var context = new StockContext()) // Замените YourDbContext на ваш контекст
+        {
+            return context.Users.ToList();
+        }
+    }
+    public static void addNewUser(User newUser)
+    {
+        using (var context = new StockContext()) // Замените YourDbContext на ваш контекст
+        {
+            context.Users.Add(newUser);
+            context.SaveChanges();
+        }
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -179,7 +193,7 @@ public partial class StockContext : DbContext
                 .HasColumnName("role_name");
         });
 
-        modelBuilder.Entity<SectorPage>(entity =>
+        modelBuilder.Entity<Sectors>(entity =>
         {
             entity.HasKey(e => e.SectorId).HasName("PK__Sectors__17DFCD53759DF56F");
 

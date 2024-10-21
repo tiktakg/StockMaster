@@ -16,6 +16,6 @@
             <CheckBox Name="RememberMeCheckBox" Content="Запомнить меня" Foreground="White" Margin="150,150,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
             <Button Name="LoginButton" Content="Авторизоваться" Width="120" Height="30" Margin="40,200,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Red" Foreground="White" Click="LoginButton_Click"/>
-            <Button Name="RegisterButton" Content="Регистрация" Width="120" Height="30" Margin="220,200,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Red" Foreground="White"/>
+        <Button Name="RegisterButton" Content="Регистрация" Width="120" Height="30" Margin="220,200,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Red" Foreground="White" Click="RegisterButton_Click"/>
         </Grid>
     </Window>

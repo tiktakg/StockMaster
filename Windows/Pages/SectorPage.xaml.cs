@@ -1,8 +1,6 @@
-﻿using StockMaster.Entitys;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,30 +13,35 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static StockMaster.Windows.StockPage;
 
 namespace StockMaster.Windows
 {
-  
-    public partial class StockPage : Page
+    /// <summary>
+    /// Interaction logic for test.xaml
+    /// </summary>
+    public partial class SectorPage : Page
     {
-        public StockPage()
+        public SectorPage()
         {
             InitializeComponent();
             LoadStocks();
         }
-
         private void LoadStocks()
         {
 
-            var Stocks = new ObservableCollection<StockViewModel>(Tools.GetAllStock());
-            StocksDataGrid.ItemsSource = Stocks;
-
+            var Sectors = new ObservableCollection<SectorViewModel>(Tools.GetAllSector());
+            StocksDataGrid.ItemsSource = Sectors;
         }
-        public class StockViewModel
+        public class SectorViewModel
         {
             public string Name { get; set; }
-            public string Sector { get; set; }
-            public decimal? BuyPrice { get; set; }
+            public string Desription { get; set; }
+            public decimal? CountCompanyis { get; set; }
         }
+
     }
 }
+
+ 
+

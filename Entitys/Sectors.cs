@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace StockMaster.Entitys;
 
-public partial class SectorPage
+public partial class Sectors
 {
     public int SectorId { get; set; }
 

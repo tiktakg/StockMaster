@@ -27,7 +27,7 @@ public partial class Stock
 
     public virtual ICollection<PortfolioStock> PortfolioStocks { get; set; } = new List<PortfolioStock>();
 
-    public virtual SectorPage? Sector { get; set; }
+    public virtual Sectors? Sector { get; set; }
 
     public virtual ICollection<WatchlistStock> WatchlistStocks { get; set; } = new List<WatchlistStock>();
 }

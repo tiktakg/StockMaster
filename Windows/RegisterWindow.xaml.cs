@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,8 +13,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+using StockMaster;
+using StockMaster.Entitys;
+
 namespace StockMaster.windows
 {
+
     /// <summary>
     /// Interaction logic for RegisterWindow.xaml
     /// </summary>
@@ -26,12 +31,145 @@ namespace StockMaster.windows
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
+            string name = NameTextBox.Text.Trim();
+            string email = EmailTextBox.Text.Trim();
+            string login = LoginTextBox.Text.Trim();
+            string password = PasswordBox.Password;
 
+            if (string.IsNullOrWhiteSpace(name) ||
+                string.IsNullOrWhiteSpace(email) ||
+                string.IsNullOrWhiteSpace(login) ||
+                string.IsNullOrWhiteSpace(password))
+            {
+                MessageBox.Show("Все поля должны быть заполнены!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (!Tools.IsValidEmail(email))
+            {
+                MessageBox.Show("Некорректный адрес электронной почты!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (!Tools.IsValidName(name))
+            {
+                MessageBox.Show("Имя может содержать только буквы и пробелы!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (login.Length <= 5)
+            {
+                MessageBox.Show("Логин должен содержать более 5 символов!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (!Tools.IsValidPassword(password))
+            {
+                MessageBox.Show("Пароль должен содержать не менее 6 символов, включать заглавные и строчные буквы, цифры и специальные символы!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            
+
+            if(!Tools.IsUniqEmail(email))
+            {
+                MessageBox.Show("Такой пользователь уже существует", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+
+            User newUser = Tools.CreateUser(login, email, password);
+            StockContext.addNewUser(newUser);
+
+            MessageBox.Show("Регистрация прошла успешно!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+       
+       
+
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
+            AuthWindow authWindow  = new AuthWindow();
+            authWindow.Show();
+            this.Close();
+        }
 
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                // Прячем placeholder, если поле получает фокус
+                var placeholder = FindPlaceholder(textBox);
+                if (placeholder != null)
+                    placeholder.Visibility = Visibility.Collapsed; // Скрываем placeholder
+            }
+        }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                // Показываем placeholder, если поле пустое и теряет фокус
+                if (string.IsNullOrEmpty(textBox.Text))
+                {
+                    var placeholder = FindPlaceholder(textBox);
+                    if (placeholder != null)
+                        placeholder.Visibility = Visibility.Visible; // Показываем placeholder
+                }
+            }
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                // Скрываем placeholder, если есть текст
+                var placeholder = FindPlaceholder(textBox);
+                if (placeholder != null)
+                {
+                    placeholder.Visibility = string.IsNullOrEmpty(textBox.Text) ? Visibility.Visible : Visibility.Collapsed;
+                }
+            }
+        }
+
+        private void PasswordBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            var passwordBox = sender as PasswordBox;
+            // Прячем placeholder, если поле получает фокус
+            var placeholder = FindPlaceholder(passwordBox);
+            if (placeholder != null)
+                placeholder.Visibility = Visibility.Collapsed; // Скрываем placeholder
+        }
+
+        private void PasswordBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            var passwordBox = sender as PasswordBox;
+            // Показываем placeholder, если поле пустое и теряет фокус
+            if (string.IsNullOrEmpty(passwordBox.Password))
+            {
+                var placeholder = FindPlaceholder(passwordBox);
+                if (placeholder != null)
+                    placeholder.Visibility = Visibility.Visible; // Показываем placeholder
+            }
+        }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            var passwordBox = sender as PasswordBox;
+            // Скрываем placeholder, если есть текст
+            var placeholder = FindPlaceholder(passwordBox);
+            if (placeholder != null)
+            {
+                placeholder.Visibility = string.IsNullOrEmpty(passwordBox.Password) ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
+        private TextBlock FindPlaceholder(Control control)
+        {
+            // Находим соответствующий TextBlock для placeholder
+            return control.Parent is Grid grid ? (TextBlock)grid.Children
+                .OfType<TextBlock>()
+                .FirstOrDefault(tb => tb.Name == $"{control.Name}Placeholder") : null;
         }
     }
 }

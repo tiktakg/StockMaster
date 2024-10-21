@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace StockMaster.Windows
+namespace StockMaster.Windows.Pages
 {
     /// <summary>
-    /// Interaction logic for test.xaml
+    /// Interaction logic for Companies.xaml
     /// </summary>
-    public partial class SectorPage : Page
+    public partial class CompanyPage : Page
     {
-        public SectorPage()
+        public CompanyPage()
         {
             InitializeComponent();
         }

@@ -17,9 +17,9 @@
         <StackPanel Background="Red" Width="150" HorizontalAlignment="Left" Margin="0,51,0,0">
             <Button Content="Все акции" Background="Black" Foreground="White" Height="40" FontSize="16" Margin="0,5,0,5" Click="AllStocksButton_Click"/>
             <Button Content="Сектора" Background="Black" Foreground="White" Height="40" FontSize="16" Margin="0,5,0,5" Click="AllSectorsButton_Click"/>
-            <Button Content="Компании" Background="Black" Foreground="White" Height="40" FontSize="16" Margin="0,5,0,5"/>
-            <Button Content="Отслеживание" Background="Black" Foreground="White" Height="40" FontSize="16" Margin="0,5,0,5"/>
-            <Button Content="Мой портфель" Background="Black" Foreground="White" Height="40" FontSize="16" Margin="0,5,0,5"/>
+            <Button Content="Компании" Background="Black" Foreground="White" Height="40" FontSize="16" Margin="0,5,0,5" Click="AllCompaniesButton_Click"/>
+            <Button Content="Мой портфель" Background="Black" Foreground="White" Height="40" FontSize="16" Margin="0,5,0,5" Click="PortfolioButton_Click"/>
+            <Button Content="Создать отчет" Background="Black" Foreground="White" Height="40" FontSize="16" Margin="0,130,0,5"  Click="WatchListButton_Click"/>
         </StackPanel>
 
         <Frame Name="MainFrame" Margin="150,50,0,0" NavigationUIVisibility="Hidden" Background="Black"/>

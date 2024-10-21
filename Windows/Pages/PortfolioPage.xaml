@@ -1,0 +1,30 @@
+﻿<Page x:Class="StockMaster.Windows.Pages.PortfolioPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:StockMaster.Windows.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PortfolioPage">
+
+    <Grid>
+        <DataGrid Name="StocksDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single" Background="Black" Foreground="White" IsReadOnly="True">
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Акция" Binding="{Binding Name}" Width="150"/>
+                <DataGridTextColumn Header="Цена" Binding="{Binding Name}" Width="150"/>
+                <DataGridTextColumn Header="Кол-во" Binding="{Binding Name}" Width="150"/>
+                <DataGridTextColumn Header="Общая сумма" Binding="{Binding Name}" Width="150"/>
+            </DataGrid.Columns>
+
+
+        </DataGrid>
+    </Grid>
+</Page>

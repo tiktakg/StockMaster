@@ -12,23 +12,24 @@
     <Grid Background="Black">
 
         <DataGrid Name="StocksDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single" Background="Black" Foreground="White" IsReadOnly="True">
-            <DataGrid.ColumnHeaderStyle>
+            <DataGrid.Resources>
+                <!-- Стиль для заголовков столбцов -->
                 <Style TargetType="DataGridColumnHeader">
-                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Background" Value="Black"/>
                     <Setter Property="Foreground" Value="White"/>
                     <Setter Property="FontWeight" Value="Bold"/>
                 </Style>
-            </DataGrid.ColumnHeaderStyle>
+                <!-- Стиль для строк -->
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="Black"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Style>
+            </DataGrid.Resources>
+
             <DataGrid.Columns>
-                <!-- Название акции -->
                 <DataGridTextColumn Header="Название акции" Binding="{Binding Name}" Width="150"/>
-                <!-- Сектор -->
                 <DataGridTextColumn Header="Сектор" Binding="{Binding Sector}" Width="100"/>
-                <!-- Цена покупки -->
                 <DataGridTextColumn Header="Цена" Binding="{Binding BuyPrice}" Width="100"/>
-                <!-- Цена продажи -->
-                <!-- Дата ближайших дивидендов -->
-                <DataGridTextColumn Header="Дата дивидендов" Binding="{Binding DividendDate}" Width="150"/>
             </DataGrid.Columns>
 
 
