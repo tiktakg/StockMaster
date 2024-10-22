@@ -34,6 +34,19 @@ namespace StockMaster.Windows
             StocksDataGrid.ItemsSource = Stocks;
 
         }
+        private void BuyButton_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            var dataGridRow = DataGridRow.GetRowContainingElement(button);
+            var stock = dataGridRow.Item as StockViewModel; // Замените Stock на вашу модель данных
+
+            if (stock != null)
+            {
+                BuyStockWindow buyStockWindow = new BuyStockWindow(stock.Name, stock.BuyPrice);
+                buyStockWindow.ShowDialog();
+
+            }
+        }
         public class StockViewModel
         {
             public string Name { get; set; }

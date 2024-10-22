@@ -43,6 +43,7 @@ namespace StockMaster.windows
 
 
             MainWindow mainWindow = new MainWindow();
+            MainWindow._userId = Tools.GetUserId(login, password);
             mainWindow.Show();
             this.Close();
         }

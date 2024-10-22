@@ -10,19 +10,25 @@
 
     <Grid>
         <DataGrid Name="StocksDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single" Background="Black" Foreground="White" IsReadOnly="True">
-            <DataGrid.ColumnHeaderStyle>
+            <DataGrid.Resources>
+                <!-- Стиль для заголовков столбцов -->
                 <Style TargetType="DataGridColumnHeader">
-                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Background" Value="Black"/>
                     <Setter Property="Foreground" Value="White"/>
                     <Setter Property="FontWeight" Value="Bold"/>
                 </Style>
-            </DataGrid.ColumnHeaderStyle>
+                <!-- Стиль для строк -->
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="Black"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <!-- Название акции -->
                 <DataGridTextColumn Header="Компания" Binding="{Binding Name}" Width="150"/>
-                <DataGridTextColumn Header="Сектор" Binding="{Binding Name}" Width="150"/>
-                <DataGridTextColumn Header="Глава" Binding="{Binding Name}" Width="150"/>
-                <DataGridTextColumn Header="Страна" Binding="{Binding Name}" Width="150"/>
+                <DataGridTextColumn Header="Сектор" Binding="{Binding Sector}" Width="150"/>
+                <DataGridTextColumn Header="Глава" Binding="{Binding Ceo}" Width="150"/>
+                <DataGridTextColumn Header="Страна" Binding="{Binding Headquarters}" Width="150"/>
        
             </DataGrid.Columns>
 

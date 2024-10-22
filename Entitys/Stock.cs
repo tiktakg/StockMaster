@@ -21,7 +21,7 @@ public partial class Stock
 
     public virtual ICollection<AnalystRating> AnalystRatings { get; set; } = new List<AnalystRating>();
 
-    public virtual Company? Company { get; set; }
+    public virtual Companies? Company { get; set; }
 
     public virtual ICollection<Dividend> Dividends { get; set; } = new List<Dividend>();
 

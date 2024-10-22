@@ -6,6 +6,8 @@ namespace StockMaster.Windows
 {
     public partial class MainWindow : Window
     {
+        public static int _userId { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();

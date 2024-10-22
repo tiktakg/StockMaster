@@ -18,7 +18,7 @@ public partial class StockContext : DbContext
 
     public virtual DbSet<AnalystRating> AnalystRatings { get; set; }
 
-    public virtual DbSet<Company> Companies { get; set; }
+    public virtual DbSet<Companies> Companies { get; set; }
 
     public virtual DbSet<Dividend> Dividends { get; set; }
 
@@ -39,14 +39,14 @@ public partial class StockContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer("Data Source=TikTak;Initial Catalog=stock;Integrated Security=True;Trust Server Certificate=True");
 
-    public static List<User> getAllUsers()
+    public static List<User> GetAllUsers()
     {
         using (var context = new StockContext()) // Замените YourDbContext на ваш контекст
         {
             return context.Users.ToList();
         }
     }
-    public static void addNewUser(User newUser)
+    public static void AddNewUser(User newUser)
     {
         using (var context = new StockContext()) // Замените YourDbContext на ваш контекст
         {
@@ -55,6 +55,29 @@ public partial class StockContext : DbContext
         }
     }
 
+    public static void AddNewPortfolio(Portfolio newPortfolio)
+    {
+        using (var context = new StockContext()) // Замените YourDbContext на ваш контекст
+        {
+            context.Portfolios.Add(newPortfolio);
+            context.SaveChanges();
+        }
+    }
+
+    public static List<Portfolio> GetAllPortfolios()
+    {
+        using (var context = new StockContext()) // Замените YourDbContext на ваш контекст
+        {
+            return context.Portfolios.ToList();
+        }
+    }
+    public static List<Stock> GetAllStocks()
+    {
+        using (var context = new StockContext()) // Замените YourDbContext на ваш контекст
+        {
+            return context.Stocks.ToList();
+        }
+    }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Alert>(entity =>
@@ -103,7 +126,7 @@ public partial class StockContext : DbContext
                 .HasConstraintName("FK__AnalystRa__stock__5070F446");
         });
 
-        modelBuilder.Entity<Company>(entity =>
+        modelBuilder.Entity<Companies>(entity =>
         {
             entity.HasKey(e => e.CompanyId).HasName("PK__Companie__3E2672353C7A3A7A");
 

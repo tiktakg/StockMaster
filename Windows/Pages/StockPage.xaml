@@ -30,8 +30,16 @@
                 <DataGridTextColumn Header="Название акции" Binding="{Binding Name}" Width="150"/>
                 <DataGridTextColumn Header="Сектор" Binding="{Binding Sector}" Width="100"/>
                 <DataGridTextColumn Header="Цена" Binding="{Binding BuyPrice}" Width="100"/>
-            </DataGrid.Columns>
 
+                <!-- Столбец с кнопкой "Купить" -->
+                <DataGridTemplateColumn Header="Действие" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Купить" Background="Gray" Foreground="White" Click="BuyButton_Click" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
 
         </DataGrid>
     </Grid>

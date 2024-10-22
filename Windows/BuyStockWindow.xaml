@@ -1,0 +1,44 @@
+﻿<Window x:Class="StockMaster.Windows.BuyStockWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Покупка акций" Height="300" Width="450" Background="Black" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+
+    <Grid Margin="20">
+        <!-- Разметка для элементов, 4 строки и 2 столбца -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Название акции -->
+        <TextBlock Text="Название акции:"  Foreground="Red" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0" Grid.Row="0" Grid.Column="0" />
+        <TextBlock Name="StockNameTextBlock" Text="" VerticalAlignment="Center" Background="Black" Foreground="White" Padding="5" Grid.Row="0" Grid.Column="1" />
+
+        <!-- Количество акций -->
+      
+
+        <!-- Стоимость акции -->
+        <TextBlock Text="Стоимость акции:" Foreground="Red" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0" Grid.Row="2" Grid.Column="0" />
+        <TextBlock Name="StockPriceTextBlock"  VerticalAlignment="Center" Background="Black" Foreground="White" Padding="5" Grid.Row="2" Grid.Column="1" />
+      
+        <TextBlock Text="Количество акций:" Foreground="Red" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0" Grid.Row="1" Grid.Column="0" />
+        <TextBox Name="QuantityTextBox" VerticalAlignment="Center" Background="Black" Foreground="White" BorderBrush="Red" Padding="5" Grid.Row="1" Grid.Column="1" TextChanged="QuantityTextBox_TextChanged" />
+        <!-- Общая сумма -->
+        <TextBlock Text="Общая сумма:" Foreground="Red" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0" Grid.Row="3" Grid.Column="0" />
+        <TextBlock Name="TotalAmountTextBlock" VerticalAlignment="Center" Background="Black" Foreground="White" Padding="5" Grid.Row="3" Grid.Column="1" />
+
+        <!-- Кнопки -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="4" Grid.ColumnSpan="2" Margin="0,20,0,0">
+            <Button Content="Купить" Width="100" Height="30" Background="Red" Foreground="White" FontWeight="Bold" BorderBrush="Transparent" Margin="0,0,10,0" Click="BuyButton_Click" />
+            <Button Content="Отмена" Width="100" Height="30" Background="Red" Foreground="White" FontWeight="Bold" BorderBrush="Transparent" Click="CancelButton_Click" />
+        </StackPanel>
+    </Grid>
+</Window>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace StockMaster.Entitys;
 
-public partial class Company
+public partial class Companies
 {
     public int CompanyId { get; set; }
 

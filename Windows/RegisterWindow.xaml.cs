@@ -77,9 +77,7 @@ namespace StockMaster.windows
                 return;
             }
 
-
-            User newUser = Tools.CreateUser(login, email, password);
-            StockContext.addNewUser(newUser);
+            Tools.RegisterUser(login, email, password);
 
             MessageBox.Show("Регистрация прошла успешно!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
         }

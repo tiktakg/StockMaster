@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,20 @@ namespace StockMaster.Windows.Pages
         public CompanyPage()
         {
             InitializeComponent();
+            LoadStocks();
+        }
+        private void LoadStocks()
+        {
+
+            var Company = new ObservableCollection<CompanyViewModel>(Tools.GetAllCompany());
+            StocksDataGrid.ItemsSource = Company;
+        }
+        public class CompanyViewModel
+        {
+            public string Name { get; set; }
+            public string Sector { get; set; }
+            public string Ceo { get; set; }
+            public string Headquarters { get; set; }
         }
     }
 }
