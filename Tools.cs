@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using static StockMaster.Windows.Pages.CompanyPage;
+using static StockMaster.Windows.Pages.PortfolioPage;
 using static StockMaster.Windows.SectorPage;
 using static StockMaster.Windows.StockPage;
 using User = StockMaster.Entitys.User;
@@ -58,6 +59,39 @@ namespace StockMaster
                      Name = s.Symbol,
                      Sector = s.Sector.Name, // Предполагаем, что Sector имеет свойство Name
                      BuyPrice = s.CurrentPrice
+                 })
+                 .ToList();
+            }
+        }
+
+        public static int GetIdPortfolio(int idUser)
+        {
+            int idPorfolio1;
+            using (var context = new StockContext()) // Замените на ваш контекст
+            {
+                var idPortfolio = context.Portfolios.
+                    Where(u => u.UserId == idUser).
+                    Include(s => s.PortfolioId).
+                    Select(s => s.PortfolioId);
+                idPorfolio1= idPortfolio.FirstOrDefault();
+            }
+
+            return idPorfolio1;
+        }
+
+        public static List<PortfolioViewModel> GetCurrentPortfolio(int idPortfolio)
+        {
+            using (var context = new StockContext()) // Замените на ваш контекст
+            {
+                return context.PortfolioStocks
+                  .Where(s => s.PortfolioId == idPortfolio)
+                 .Include(s => s.StockId) // Подгружаем сектор
+                 .Select(s => new PortfolioViewModel
+                 {
+                     Name = s.Stock.Symbol,
+                     BuyPrice = s.Stock.CurrentPrice,
+                     Quantity = s.Quantity,
+                     Sum = s.PurchasePrice * s.Quantity // Предполагаем, что Sector имеет свойство Name
                  })
                  .ToList();
             }

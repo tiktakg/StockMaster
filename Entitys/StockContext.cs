@@ -37,7 +37,7 @@ public partial class StockContext : DbContext
     public virtual DbSet<WatchlistStock> WatchlistStocks { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Data Source=TikTak;Initial Catalog=stock;Integrated Security=True;Trust Server Certificate=True");
+        => optionsBuilder.UseSqlServer("Data Source=TikTakM;Initial Catalog=stock2;Integrated Security=True;Trust Server Certificate=True");
 
     public static List<User> GetAllUsers()
     {

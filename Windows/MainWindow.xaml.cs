@@ -31,7 +31,7 @@ namespace StockMaster.Windows
 
         private void PortfolioButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new PortfolioPage());
+            MainFrame.Navigate(new PortfolioPage(_userId));
 
         }
 

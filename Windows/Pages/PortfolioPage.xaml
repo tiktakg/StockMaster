@@ -10,18 +10,24 @@
 
     <Grid>
         <DataGrid Name="StocksDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single" Background="Black" Foreground="White" IsReadOnly="True">
-            <DataGrid.ColumnHeaderStyle>
+            <DataGrid.Resources>
+                <!-- Стиль для заголовков столбцов -->
                 <Style TargetType="DataGridColumnHeader">
-                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Background" Value="Black"/>
                     <Setter Property="Foreground" Value="White"/>
                     <Setter Property="FontWeight" Value="Bold"/>
                 </Style>
-            </DataGrid.ColumnHeaderStyle>
+                <!-- Стиль для строк -->
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="Black"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Акция" Binding="{Binding Name}" Width="150"/>
-                <DataGridTextColumn Header="Цена" Binding="{Binding Name}" Width="150"/>
-                <DataGridTextColumn Header="Кол-во" Binding="{Binding Name}" Width="150"/>
-                <DataGridTextColumn Header="Общая сумма" Binding="{Binding Name}" Width="150"/>
+                <DataGridTextColumn Header="Цена" Binding="{Binding BuyPrice}" Width="150"/>
+                <DataGridTextColumn Header="Кол-во" Binding="{Binding Quantity}" Width="150"/>
+                <DataGridTextColumn Header="Общая сумма" Binding="{Binding Sum}" Width="150"/>
             </DataGrid.Columns>
 
 
