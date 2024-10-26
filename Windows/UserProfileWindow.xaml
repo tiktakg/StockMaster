@@ -1,0 +1,52 @@
+﻿<Window x:Class="StockMaster.Windows.UserProfileWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StockMaster.Windows"
+        mc:Ignorable="d"
+       Title="User Form" Height="250" Width="400"
+        Background="Black">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Username Field -->
+        <TextBlock Text="Ваше имя:" VerticalAlignment="Center" Margin="5" Foreground="White"/>
+        <TextBox x:Name="UsernameTextBox" Grid.Column="1" Margin="5"
+                 Background="Black" Foreground="White" BorderBrush="Red" BorderThickness="1"/>
+
+        <!-- Email Field -->
+        <TextBlock Text="Ваш email:" Grid.Row="1" VerticalAlignment="Center" Margin="5" Foreground="White"/>
+        <TextBox x:Name="EmailTextBox" Grid.Row="1" Grid.Column="1" Margin="5"
+                 Background="Black" Foreground="White" BorderBrush="Red" BorderThickness="1"/>
+
+        <!-- Password Field -->
+        <TextBlock Text="Ваш пароль:" Grid.Row="2" VerticalAlignment="Center" Margin="5" Foreground="White"/>
+        <TextBox x:Name="PasswordTextBox" Grid.Row="2" Grid.Column="1" Margin="5"
+                 Background="Black" Foreground="White" BorderBrush="Red" BorderThickness="1"/>
+
+        <!-- Role Field -->
+        <TextBlock Text="Ваша роль:" Grid.Row="3" VerticalAlignment="Center" Margin="5" Foreground="White"/>
+        <TextBox x:Name="RoleTextBox" Grid.Row="3" Grid.Column="1" Margin="5" IsEnabled="False"
+                 Background="Black" Foreground="White" BorderBrush="Red" BorderThickness="1"/>
+
+     
+
+        <!-- Exit and Update Buttons -->
+        <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0" >
+            <Button Content="Изменить данные" Width="125"  Background="Red" Foreground="White" BorderBrush="Black" Margin="25" BorderThickness="1" Click="UpdateButton_Click"/>
+            <Button Content="Выйти" Width="125"  Background="Red" Foreground="White" BorderBrush="Black"  Margin="25" BorderThickness="2" Click="ExitButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

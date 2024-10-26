@@ -13,6 +13,7 @@ using static StockMaster.Windows.Pages.CompanyPage;
 using static StockMaster.Windows.Pages.PortfolioPage;
 using static StockMaster.Windows.SectorPage;
 using static StockMaster.Windows.StockPage;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using User = StockMaster.Entitys.User;
 
 namespace StockMaster
@@ -42,7 +43,7 @@ namespace StockMaster
 
             var existingUser = StockContext.GetAllUsers().SingleOrDefault(u => u.Email == email);
 
-            if (existingUser == null) 
+            if (existingUser == null)
                 return true;
 
             return false;
@@ -64,19 +65,25 @@ namespace StockMaster
             }
         }
 
-        public static int GetIdPortfolio(int idUser)
+        public static User GetCurrentUserById(int idUser)
         {
-            int idPorfolio1;
             using (var context = new StockContext()) // Замените на ваш контекст
             {
-                var idPortfolio = context.Portfolios.
+                return context.Users.
+                    Where(u => u.UserId == idUser).
+                    FirstOrDefault();
+            }
+        }
+
+        public static int GetIdPortfolio(int idUser)
+        {
+            using (var context = new StockContext()) // Замените на ваш контекст
+            {
+                return context.Portfolios.
                     Where(u => u.UserId == idUser).
                     Include(s => s.PortfolioId).
-                    Select(s => s.PortfolioId);
-                idPorfolio1= idPortfolio.FirstOrDefault();
+                    Select(s => s.PortfolioId).FirstOrDefault();
             }
-
-            return idPorfolio1;
         }
 
         public static List<PortfolioViewModel> GetCurrentPortfolio(int idPortfolio)
@@ -111,6 +118,21 @@ namespace StockMaster
                  .ToList();
             }
         }
+
+        public static List<UserViewModel> GetAllUsers()
+        {
+            using (var context = new StockContext()) // Замените на ваш контекст
+            {
+                return context.Users
+                 .Select(u => new UserViewModel
+                 {
+                     Username = u.Username,
+                     Email = u.Email, // Предполагаем, что Sector имеет свойство Name
+                     Role = u.Role.ToString()
+                 })
+                 .ToList();
+            }
+        }
         public static List<CompanyViewModel> GetAllCompany()
         {
             using (var context = new StockContext()) // Замените на ваш контекст
@@ -133,17 +155,19 @@ namespace StockMaster
             return allStock.StockId;
         }
 
-        public static int GetUserId(string login, string password)
+        public static int GetUserIdByEmail(string login)
         {
-            var user = StockContext.GetAllUsers().SingleOrDefault(u => u.Email == login && u.Password == password);
+            User user = StockContext.GetAllUsers().
+                Where(u => u.Email == login).
+                SingleOrDefault();
 
             if (user == null)
                 throw new Exception("User is null!!");
 
-            return user.UserId; 
+            return user.UserId;
         }
 
-  
+
         public static Portfolio GetUserPortfolio(int userId)
         {
 
@@ -160,9 +184,9 @@ namespace StockMaster
 
         public static bool IsUserExist(string login, string password)
         {
-            var user = StockContext.GetAllUsers().SingleOrDefault(u => u.Email== login);
+            var user = StockContext.GetAllUsers().SingleOrDefault(u => u.Email == login);
 
-            if(user!= null && user.Password == password) 
+            if (user != null && user.Password == password)
                 return true;
             return false;
 
@@ -178,15 +202,43 @@ namespace StockMaster
             };
         }
 
+        public static bool isDataForUserCorrect(string login, string password,string email)
+        {
+
+
+            if (!IsValidEmail(email))
+            {
+                MessageBox.Show("Некорректный адрес электронной почты!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if (login.Length <= 5)
+            {
+                MessageBox.Show("Логин должен содержать более 5 символов!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if (!IsValidPassword(password))
+            {
+                MessageBox.Show("Пароль должен содержать не менее 6 символов, включать заглавные и строчные буквы, цифры и специальные символы!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if (!IsUniqEmail(email))
+            {
+                MessageBox.Show("Такой пользователь уже существует", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            return true;
+        }
+
         public static void RegisterUser(string login, string email, string password)
         {
-            // Создаем нового пользователя
             User newUser = CreateUser(login, email, password);
 
-            // Добавляем пользователя в базу данных
             StockContext.AddNewUser(newUser);
 
-            // Создаем пустое портфолио для нового пользователя
             CreateEmptyPortfolio(newUser.UserId);
         }
 
@@ -194,14 +246,15 @@ namespace StockMaster
         {
             var newPortfolio = new Portfolio
             {
+                
                 UserId = userId,
-                PortfolioName = "Мое портфолио", // Название портфолио по умолчанию
+                PortfolioName = "Портфолио номер:" + userId, // Название портфолио по умолчанию
                 CreatedAt = DateTime.Now,
                 TotalValue = 0 // Начальная стоимость
             };
 
             StockContext.AddNewPortfolio(newPortfolio); // Предположим, у вас есть этот метод в StockContext
-           // Сохраняем изменения в базе данных
+                                                        // Сохраняем изменения в базе данных
         }
 
     }

@@ -9,9 +9,9 @@
 
     <Grid>
         <Grid Background="Red" Height="50" VerticalAlignment="Top">
-            <TextBlock Text="Сверух" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" FontSize="20"/>
+            <TextBlock Text="" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" FontSize="20"/>
             <TextBlock Text="StockMaster" Foreground="White"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
-            <TextBlock Text="Сверух" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" FontSize="16"/>
+            <TextBlock Name="UserName_TextBlock" Text="User:" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" FontSize="16" PreviewMouseDown="TextBlock_PreviewMouseDown"/>
         </Grid>
 
         <StackPanel Background="Red" Width="150" HorizontalAlignment="Left" Margin="0,45,0,0">
@@ -19,9 +19,9 @@
             <Button Content="Сектора" Background="Black" Foreground="White" Height="40" FontSize="16" Margin="0,5,0,5" Click="AllSectorsButton_Click"/>
             <Button Content="Компании" Background="Black" Foreground="White" Height="40" FontSize="16" Margin="0,5,0,5" Click="AllCompaniesButton_Click"/>
             <Button Content="Мой портфель" Background="Black" Foreground="White" Height="40" FontSize="16" Margin="0,5,0,5" Click="PortfolioButton_Click"/>
-            <Button Content="Создать отчет" Background="Black" Foreground="White" Height="40" FontSize="16" Margin="0,130,0,5"  Click="WatchListButton_Click"/>
+            <Button Content="Создать отчет" Background="Black" Foreground="White" Height="40" FontSize="16" Margin="0,5,0,5"  Click="CreateReport_Click"/>
         </StackPanel>
-
+        <Button Name="AllUser_Button" Content="Все пользователи" Background="Black" Foreground="White" Height="40" Width="150" FontSize="16" Margin="0,50,0,5" HorizontalAlignment="Left" VerticalAlignment="Bottom" Visibility="Hidden" Click="AllUserButton_Click" />
         <Frame Name="MainFrame" Margin="150,50,0,0" NavigationUIVisibility="Hidden" Background="Black"/>
     </Grid>
 </Window>

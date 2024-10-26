@@ -38,12 +38,5 @@ namespace StockMaster.Windows.Pages
             StocksDataGrid.ItemsSource = Portfolio;
 
         }
-        public class PortfolioViewModel
-        {
-            public string Name { get; set; }
-            public decimal? BuyPrice { get; set; }
-            public decimal? Quantity { get; set; }
-            public decimal? Sum { get; set; }
-        }
     }
 }

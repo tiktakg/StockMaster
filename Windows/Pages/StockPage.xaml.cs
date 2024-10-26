@@ -29,10 +29,8 @@ namespace StockMaster.Windows
 
         private void LoadStocks()
         {
-
             var Stocks = new ObservableCollection<StockViewModel>(Tools.GetAllStock());
             StocksDataGrid.ItemsSource = Stocks;
-
         }
         private void BuyButton_Click(object sender, RoutedEventArgs e)
         {
@@ -47,11 +45,6 @@ namespace StockMaster.Windows
 
             }
         }
-        public class StockViewModel
-        {
-            public string Name { get; set; }
-            public string Sector { get; set; }
-            public decimal? BuyPrice { get; set; }
-        }
+        
     }
 }

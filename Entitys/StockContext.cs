@@ -37,7 +37,7 @@ public partial class StockContext : DbContext
     public virtual DbSet<WatchlistStock> WatchlistStocks { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Data Source=TikTakM;Initial Catalog=stock2;Integrated Security=True;Trust Server Certificate=True");
+        => optionsBuilder.UseSqlServer("Data Source=TikTak;Initial Catalog=stock;Integrated Security=True;Trust Server Certificate=True");
 
     public static List<User> GetAllUsers()
     {
@@ -54,6 +54,55 @@ public partial class StockContext : DbContext
             context.SaveChanges();
         }
     }
+
+    public static void UpdateUserById(int userId, string newUsername, string newEmail, string newPassword)
+    {
+        using (var context = new StockContext())
+        {
+            var userToUpdate = context.Users.Find(userId);
+
+            // If user exists, update properties
+            if (userToUpdate != null)
+            {
+                userToUpdate.Username = newUsername;
+                userToUpdate.Email = newEmail;
+                userToUpdate.Password = newPassword; // Consider hashing the password here
+
+                context.SaveChanges();
+            }
+        }
+    }
+    public static void MakeAdminUserRoleById(int userId)
+    {
+        using (var context = new StockContext())
+        {
+            var userToUpdate = context.Users.Find(userId);
+
+            // If user exists, update properties
+            if (userToUpdate != null)
+            {
+                userToUpdate.Role = 1;
+                context.SaveChanges();
+            }
+        }
+    }
+
+    public static void DeleteUserById(int userId)
+    {
+        using (var context = new StockContext())
+        {
+            var userToDelete = context.Users.Find(userId);
+
+            if (userToDelete != null)
+            {
+                context.Users.Remove(userToDelete);
+                context.SaveChanges();
+            }
+        }
+    }
+
+
+
 
     public static void AddNewPortfolio(Portfolio newPortfolio)
     {

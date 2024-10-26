@@ -17,7 +17,7 @@ namespace StockMaster.Windows
             StockNameTextBlock.Text = Name;
             StockPriceTextBlock.Text = BuyPrice.ToString();
 
-            _userId = MainWindow._userId;
+            _userId = MainWindow.userId;
         }
 
         // Обработчик для проверки ввода только положительных чисел

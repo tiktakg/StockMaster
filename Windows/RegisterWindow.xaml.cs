@@ -45,38 +45,10 @@ namespace StockMaster.windows
                 return;
             }
 
-            if (!Tools.IsValidEmail(email))
-            {
-                MessageBox.Show("Некорректный адрес электронной почты!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+            if(!Tools.isDataForUserCorrect(login, password, email))
                 return;
-            }
 
-            if (!Tools.IsValidName(name))
-            {
-                MessageBox.Show("Имя может содержать только буквы и пробелы!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            if (login.Length <= 5)
-            {
-                MessageBox.Show("Логин должен содержать более 5 символов!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            if (!Tools.IsValidPassword(password))
-            {
-                MessageBox.Show("Пароль должен содержать не менее 6 символов, включать заглавные и строчные буквы, цифры и специальные символы!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            
-
-            if(!Tools.IsUniqEmail(email))
-            {
-                MessageBox.Show("Такой пользователь уже существует", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
+       
             Tools.RegisterUser(login, email, password);
 
             MessageBox.Show("Регистрация прошла успешно!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);

@@ -37,13 +37,11 @@ namespace StockMaster.windows
 
             if (!Tools.IsUserExist(login, password))
             {
-                MessageBox.Show("Пользователь с таким логином не найден!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Пользователь с таким логином не найден или пароль не верный! ", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-
-            MainWindow mainWindow = new MainWindow();
-            MainWindow._userId = Tools.GetUserId(login, password);
+            MainWindow mainWindow = new MainWindow(Tools.GetUserIdByEmail(login));
             mainWindow.Show();
             this.Close();
         }
